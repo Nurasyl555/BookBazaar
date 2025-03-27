@@ -1,92 +1,59 @@
-📚 BookBazaar
+# Bookbazaar
 
-📖 Описание
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
 
-BookBazaar — это веб-приложение для покупки книг. Пользователи могут просматривать каталог, оформлять заказы, оставлять отзывы и управлять избранными книгами. В проекте реализованы аутентификация, корзина, фильтры и админ-панель.
+## Development server
 
-🚀 Функционал
+To start a local development server, run:
 
-✔️ Каталог книг с фильтрацией и поиском
-
-✔️ Регистрация и авторизация (JWT)
-
-✔️ Добавление книг в избранное
-
-✔️ Оформление заказов через корзину
-
-✔️ Просмотр истории заказов
-
-✔️ Оставление отзывов и рейтингов
-
-✔️ Админ-панель для управления книгами
-
-
-🛠️ Технологии
-
-Frontend: Angular, TypeScript, Bootstrap
-
-Backend: Django Rest Framework (DRF), PostgreSQL
-
-
-Auth: JWT (JSON Web Token)
-
-📂 Установка и запуск
-
-🔧 Frontend
-
-bash
-
-Копировать
-
-Редактировать
-
-git clone https://github.com/your-repo/bookbazaar.git
-
-cd bookbazaar/frontend
-
-npm install
-
+```bash
 ng serve
+```
 
-Перейдите в браузере на http://localhost:4200.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Code scaffolding
 
-🖥 Backend
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-bash
+```bash
+ng generate component component-name
+```
 
-Копировать
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-Редактировать
+```bash
+ng generate --help
+```
 
-cd backend
+## Building
 
-pip install -r requirements.txt
+To build the project run:
 
-python manage.py migrate
+```bash
+ng build
+```
 
-python manage.py runserver
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-API доступно на http://localhost:8000/api/.
+## Running unit tests
 
-👥 Участники проекта
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-Имя Фамилия (Frontend, Angular)
+```bash
+ng test
+```
 
-Имя Фамилия (Backend, DRF)
+## Running end-to-end tests
 
-Имя Фамилия (Fullstack, Database)
+For end-to-end (e2e) testing, run:
 
-📌 Прогресс и задачи
+```bash
+ng e2e
+```
 
- Создана структура проекта
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
- Реализована авторизация
+## Additional Resources
 
- Настроены API-сервисы
-
- Завершена работа над корзиной
-
-📜 Лицензия
-
-Этот проект распространяется под лицензией MIT.
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
