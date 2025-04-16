@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from bookbazaar_backend.books.serializers import BookSerializer
+from books.serializers import BookSerializer
 from .models import Cart, CartItem, Order, OrderItem
 from books.models import Book
 from users.models import CustomUser

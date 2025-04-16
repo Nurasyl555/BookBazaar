@@ -27,3 +27,8 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def update_stock(self, quantity):
+        """Метод для обновления запаса книги"""
+        self.stock -= quantity
+        self.save()
