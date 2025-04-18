@@ -4,6 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrderService {
+  private orders: any[] = [];
 
-  constructor() { }
+  addOrder(order: any): void {
+    this.orders.push(order);
+  }
+
+  getOrders(): any[] {
+    return this.orders;
+  }
 }

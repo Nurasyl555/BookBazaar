@@ -1,0 +1,14 @@
+<h2>Корзина</h2>
+
+<div *ngIf="cartItems.length === 0">Корзина пуста</div>
+
+<div *ngFor="let item of cartItems">
+  <p><strong>{{ item.book.title }}</strong> — {{ item.quantity }} шт.</p>
+  <p>Цена за штуку: {{ item.book.price }} ₸</p>
+  <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.book.id, item.quantity)" />
+  <button (click)="remove(item.book.id)">Удалить</button>
+  <hr />
+</div>
+
+<p *ngIf="cartItems.length > 0"><strong>Итого: {{ total }} ₸</strong></p>
+<button *ngIf="cartItems.length > 0" (click)="checkout()">Оформить заказ</button>
