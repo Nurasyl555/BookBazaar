@@ -1,0 +1,18 @@
+<h2>Мои заказы</h2>
+
+<div *ngIf="orders.length === 0">
+  <p>Вы ещё ничего не заказывали.</p>
+</div>
+
+<div *ngFor="let order of orders" class="order-card">
+  <p><strong>Имя:</strong> {{ order.name }}</p>
+  <p><strong>Адрес:</strong> {{ order.address }}</p>
+  <p><strong>Дата:</strong> {{ order.date | date:'short' }}</p>
+  <p><strong>Итого:</strong> {{ order.total }} ₸</p>
+  <ul>
+    <li *ngFor="let item of order.items">
+      {{ item.title }} — {{ item.quantity }} × {{ item.price }} ₸
+    </li>
+  </ul>
+  <hr />
+</div>

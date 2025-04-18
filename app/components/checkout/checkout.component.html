@@ -1,0 +1,28 @@
+<h2>Оформление заказа</h2>
+
+<div *ngIf="cartItems.length === 0">
+  <p>Корзина пуста. Перейдите в <a routerLink="/">каталог</a>.</p>
+</div>
+
+<div *ngIf="cartItems.length > 0">
+  <p><strong>Товары:</strong></p>
+  <ul>
+    <li *ngFor="let item of cartItems">
+      {{ item.book.title }} — {{ item.quantity }} шт. × {{ item.book.price }} ₸
+    </li>
+  </ul>
+
+  <p><strong>Итого:</strong> {{ total }} ₸</p>
+
+  <form (ngSubmit)="submitOrder()">
+    <label>Имя:
+      <input type="text" [(ngModel)]="name" name="name" required />
+    </label><br /><br />
+
+    <label>Адрес:
+      <textarea [(ngModel)]="address" name="address" required></textarea>
+    </label><br /><br />
+
+    <button type="submit">Подтвердить заказ</button>
+  </form>
+</div>
