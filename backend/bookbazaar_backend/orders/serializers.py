@@ -19,6 +19,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'user', 'created_at', 'is_paid', 'total_price', 'items']
+        read_only_fields = ['user']
 
 class CartItemSerializer(serializers.ModelSerializer):
     book = BookSerializer(read_only=True)
