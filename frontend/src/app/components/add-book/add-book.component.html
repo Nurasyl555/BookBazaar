@@ -1,0 +1,36 @@
+<h2>Добавить книгу</h2>
+
+<form (ngSubmit)="submit()">
+  <label>Название:</label>
+  <input [(ngModel)]="book.title" name="title" required />
+
+  <label>Описание:</label>
+  <textarea [(ngModel)]="book.description" name="description" required></textarea>
+
+  <label>Автор:</label>
+  <input [(ngModel)]="book.author" name="author" required />
+
+  <label>Жанр:</label>
+  <select [(ngModel)]="book.genre" name="genre" required>
+    <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
+  </select>
+
+  <label>Издательство:</label>
+  <select [(ngModel)]="book.publisher" name="publisher" required>
+    <option *ngFor="let publisher of publishers" [value]="publisher.id">{{ publisher.name }}</option>
+  </select>
+
+  <label>Дата публикации:</label>
+  <input [(ngModel)]="book.publication_date" name="publication_date" type="date" required />
+
+  <label>Возрастное ограничение:</label>
+  <input [(ngModel)]="book.age_limit" name="age_limit" type="number" min="0" required />
+
+  <label>Цена:</label>
+  <input [(ngModel)]="book.price" name="price" type="number" min="0" required />
+
+  <label>Количество на складе:</label>
+  <input [(ngModel)]="book.stock" name="stock" type="number" min="0" required />
+
+  <button type="submit">Добавить</button>
+</form>

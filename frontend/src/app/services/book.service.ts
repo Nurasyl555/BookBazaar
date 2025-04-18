@@ -1,38 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Book } from '../models/book.model';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private BASE_URL = 'http://localhost:8000/api/books/'; 
+  private BASE_URL='http://127.0.0.1:8000/books/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.BASE_URL);
+  getGenres(): Observable<any>{
+    return this.http.get(`${this.BASE_URL}/genres/`);
   }
 
-  getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(`${this.BASE_URL}${id}/`);
+  getPublishers(): Observable<any>{
+    return this.http.get(`${this.BASE_URL}/publishers/`);
   }
 
-  searchBooks(query: string): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.BASE_URL}?search=${query}`);
+  addBook(bookData: any): Observable<any>{
+    return this.http.post(`${this.BASE_URL}/books/`, bookData);
   }
 
- getBooksByFilter(genre?: string, publisher?: string): Observable<Book[]> {
-  let params: string[] = [];
-  if (genre) params.push(`genre=${genre}`);
-  if (publisher) params.push(`publisher=${publisher}`);
-  const queryString = params.length ? '?' + params.join('&') : '';
-  return this.http.get<Book[]>(`${this.BASE_URL}${queryString}`);
-}
+  getBook(id: number): Observable<any>{
+    return this.http.get(`${this.BASE_URL}/books/${id}/`);
+  }
 
- getBooksSorted(orderBy: string): Observable<Book[]> {
-  return this.http.get<Book[]>(`${this.BASE_URL}?ordering=${orderBy}`);
-}
+  updateBook(id: number, bookData: any): Observable<any>{
+    return this.http.put(`${this.BASE_URL}/books/${id}/`, bookData);
+  }
 
+  getBooks(): Observable<any>{
+    return this.http.get(`${this.BASE_URL}/books/`);
+  }
+
+  deleteBook(id: number): Observable<any>{
+    return this.http.delete(`${this.BASE_URL}/books/${id}`);
+  }
 }
