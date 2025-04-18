@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
-  private BASE_URL='http://127.0.0.1:8000/api';
+  private BASE_URL='http://127.0.0.1:8000/books/';
 
   constructor(private http: HttpClient) { }
 

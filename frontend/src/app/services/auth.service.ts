@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private BASE_URL='http://127.0.0.1:8000/api/auth/';
+  private BASE_URL='http://127.0.0.1:8000/users/';
 
   constructor(private http: HttpClient) { }
 
