@@ -27,6 +27,10 @@ def login(request):
     user = CustomUser.objects.filter(username=username).first()
     if user and user.check_password(password):
         refresh = RefreshToken.for_user(user)
-        return  Response({"access": str(refresh.access_token)}, status=status.HTTP_200_OK)
+        return Response({
+    "refresh": str(refresh),
+    "access": str(refresh.access_token)
+}, status=status.HTTP_200_OK)
+
     return  Response({"detail": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
