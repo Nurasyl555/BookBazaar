@@ -7,7 +7,7 @@ import { Book } from '../models/book.model';
   providedIn: 'root'
 })
 export class BookService {
-  private BASE_URL = 'http://localhost:8000/api/books/'; 
+  private BASE_URL = 'http://127.0.0.1:8000/api/books/';
 
   constructor(private http: HttpClient) {}
 
@@ -16,23 +16,22 @@ export class BookService {
   }
 
   getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(`${this.BASE_URL}${id}/`);
+    return this.http.get<Book>(`${this.BASE_URL}/${id}/`);
   }
 
   searchBooks(query: string): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.BASE_URL}?search=${query}`);
   }
 
- getBooksByFilter(genre?: string, publisher?: string): Observable<Book[]> {
-  let params: string[] = [];
-  if (genre) params.push(`genre=${genre}`);
-  if (publisher) params.push(`publisher=${publisher}`);
-  const queryString = params.length ? '?' + params.join('&') : '';
-  return this.http.get<Book[]>(`${this.BASE_URL}${queryString}`);
-}
+  getBooksByFilter(genre?: string, publisher?: string): Observable<Book[]> {
+    let params: string[] = [];
+    if (genre) params.push(`genre=${genre}`);
+    if (publisher) params.push(`publisher=${publisher}`);
+    const queryString = params.length ? '?' + params.join('&') : '';
+    return this.http.get<Book[]>(`${this.BASE_URL}${queryString}`);
+  }
 
- getBooksSorted(orderBy: string): Observable<Book[]> {
-  return this.http.get<Book[]>(`${this.BASE_URL}?ordering=${orderBy}`);
-}
-
+  getBooksSorted(orderBy: string): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.BASE_URL}?ordering=${orderBy}`);
+  }
 }
