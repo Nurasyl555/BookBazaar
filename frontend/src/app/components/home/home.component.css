@@ -1,44 +1,49 @@
-.home-container {
-    text-align: center;
-    padding: 60px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    max-width: 700px;
-    margin: 50px auto;
+.hero {
+    height: 100vh;
+    background-image: url('/assets/hero-books.jpg'); /* Замени на нужную тебе картинку */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    position: relative;
   }
   
-  h1 {
-    font-size: 36px;
-    margin-bottom: 12px;
-    color: #333;
-  }
-  
-  p {
-    font-size: 18px;
-    margin-bottom: 30px;
-    color: #555;
-  }
-  
-  .actions {
+  .navbar {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
-  .btn {
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .nav-links a {
+    margin-left: 20px;
+    color: white;
     text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    background-color: #007acc;
-    color: #fff;
-    transition: background-color 0.3s ease;
     font-weight: 500;
   }
   
-  .btn:hover {
-    background-color: #005fa3;
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .hero-text {
+    text-align: center;
+    margin-top: 20vh;
+    padding: 0 20px;
+  }
+  
+  .hero-text h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-text p {
+    font-size: 18px;
+    line-height: 1.6;
   }
   

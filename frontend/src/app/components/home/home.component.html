@@ -1,15 +1,31 @@
-<h2>Популярные книги</h2>
-
-<label for="genre">Жанр:</label>
-<select [(ngModel)]="selectedGenre" name="genre" (change)="loadBooks()">
-  <option value="">Все</option>
-  <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
-</select>
-
-<div *ngIf="books.length === 0">Нет доступных книг по выбранному жанру.</div>
-
-<ul>
-  <li *ngFor="let book of books">
-    <strong>{{ book.title }}</strong> — {{ book.author }}
-  </li>
-</ul>
+<div class="hero">
+    <div class="navbar">
+      <div class="logo">BookBazaar</div>
+      <div class="nav-links">
+        <a routerLink="/">Главная</a>
+        <a routerLink="/catalog">Каталог</a>
+        <a routerLink="/cart">Корзина</a>
+        <a routerLink="/admin">Админ-панель</a>
+      
+        <ng-container *ngIf="authService.isLoggedIn(); else guestLinks">
+          <a routerLink="/profile">Профиль</a>
+          <a href="#" (click)="logout()">Выйти</a>
+        </ng-container>
+        <ng-template #guestLinks>
+          <a routerLink="/login">Войти</a>
+          <a routerLink="/register">Регистрация</a>
+        </ng-template>
+      </div>
+      
+    </div>
+  
+    <div class="hero-text">
+      <h1>BookBazaar — свежие книги, как с полки магазина</h1>
+      <p>
+        Открой для себя новые книги от любимых авторов.<br>
+        Покупай, сортируй, добавляй в корзину — всё просто и удобно.<br>
+        BookBazaar — твой личный книжный маркет!
+      </p>
+    </div>
+  </div>
+  

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book.model';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   genres: string[] = [];
   selectedGenre: string = '';
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, public authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadGenres();
@@ -27,6 +28,10 @@ export class HomeComponent implements OnInit {
     this.bookService.getGenres().subscribe(data => {
       this.genres = data;
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
   loadBooks(): void {
