@@ -5,10 +5,9 @@ export interface Book {
     author: string;
     genre: string;
     publisher: string;
-    published_date: string;
-    age_limit: string;
+    publication_date: string;
+    age_limit: number;
     price: number;
-    quantity: number;
-    popularity: number;
+    stock: number;
   }
   

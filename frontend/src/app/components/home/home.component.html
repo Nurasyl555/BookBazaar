@@ -1,0 +1,15 @@
+<h2>Популярные книги</h2>
+
+<label for="genre">Жанр:</label>
+<select [(ngModel)]="selectedGenre" name="genre" (change)="loadBooks()">
+  <option value="">Все</option>
+  <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+</select>
+
+<div *ngIf="books.length === 0">Нет доступных книг по выбранному жанру.</div>
+
+<ul>
+  <li *ngFor="let book of books">
+    <strong>{{ book.title }}</strong> — {{ book.author }}
+  </li>
+</ul>

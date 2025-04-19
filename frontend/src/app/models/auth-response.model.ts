@@ -1,2 +1,5 @@
-export class AuthResponse {
-}
+export interface AuthResponse {
+    access: string;
+    refresh: string;
+  }
+  

@@ -1,0 +1,9 @@
+<h2>Вход в аккаунт</h2>
+<form (ngSubmit)="login()">
+  <input type="text" [(ngModel)]="user.username" name="username" placeholder="Имя пользователя" required />
+  <input type="password" [(ngModel)]="user.password" name="password" placeholder="Пароль" required />
+  <button type="submit">Войти</button>
+</form>
+
+<p>Нет аккаунта? <a routerLink="/register">Зарегистрироваться</a></p>
+

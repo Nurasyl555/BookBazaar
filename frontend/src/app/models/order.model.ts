@@ -1,9 +1,7 @@
 import { OrderItem } from './order-item.model';
 
 export interface Order {
-  id: number;
+  id?: number;
+  date: string;
   items: OrderItem[];
-  total_price: number;
-  created_at: string;
-  status: string;
 }

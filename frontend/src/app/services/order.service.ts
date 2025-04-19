@@ -10,12 +10,10 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  // Получить список заказов
   getOrders(): Observable<any[]> {
     return this.http.get<any[]>(this.BASE_URL);
   }
 
-  // Отправить новый заказ
   addOrder(order: any): Observable<any> {
     return this.http.post<any>(this.BASE_URL, order);
   }

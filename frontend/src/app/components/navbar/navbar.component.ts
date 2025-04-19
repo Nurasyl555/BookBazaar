@@ -1,23 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { CartService } from '../../services/cart.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit {
-  cartCount: number = 0;
+export class NavbarComponent {
 
-  constructor(private cartService: CartService) {}
-
-  ngOnInit(): void {
-    this.cartService.cartCount$.subscribe((count) => {
-      this.cartCount = count;
-    });
-  }
 }
