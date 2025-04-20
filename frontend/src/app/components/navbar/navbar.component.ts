@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';           // ✅ для *ngIf
+import { RouterModule } from '@angular/router';           // ✅ для routerLink
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
+  imports: [CommonModule, RouterModule],                 // ✅ добавили модули
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}        // public — чтобы использовать в шаблоне
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
   get isAdmin(): boolean {
-    // временно просто проверка по username, позже можно заменить
     const token = this.authService.getToken();
-    return token !== null && token.includes('admin'); // пример
+    return token !== null && token.includes('admin');
   }
 
   logout() {
