@@ -9,5 +9,6 @@ export interface Book {
     age_limit: number;
     price: number;
     stock: number;
+    image: string; 
   }
   
