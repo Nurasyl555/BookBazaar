@@ -1,1 +1,17 @@
-<p>navbar works!</p>
+<nav class="navbar">
+    <div class="logo">
+      <a routerLink="/">BookBazaar</a>
+    </div>
+  
+    <ul class="nav-links">
+      <li><a routerLink="/">Главная</a></li>
+      <li><a routerLink="/catalog">Каталог</a></li>
+      <li><a routerLink="/cart">Корзина</a></li>
+      <li *ngIf="isAdmin"><a routerLink="/admin">Админ-панель</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/profile">Профиль</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="logout()">Выйти</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login">Войти</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/register">Регистрация</a></li>
+    </ul>
+  </nav>
+  

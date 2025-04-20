@@ -29,5 +29,24 @@ export const routes: Routes = [
       loadComponent: () => 
         import('./components/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent)
     },
+
+    {
+      path: 'catalog',
+      loadComponent: () =>
+        import('./components/book-catalog/book-catalog.component').then(m => m.BookCatalogComponent)
+    },
+    
+    {
+      path: 'my-orders',
+      loadComponent: () =>
+        import('./components/my-orders/my-orders.component').then(m => m.MyOrdersComponent)
+    },
+    
+    { path: 'cart', 
+      loadComponent: () =>
+        import('./components/cart/cart.component').then(m => m.CartComponent)
+    },
+   
+    
   ];
   

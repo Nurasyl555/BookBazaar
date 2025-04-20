@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .navbar {
+    background-color: blue;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .hero {
+    background-image: url('/assets/hero.jpg'); /* сюда добавь изображение */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+  }
+  
