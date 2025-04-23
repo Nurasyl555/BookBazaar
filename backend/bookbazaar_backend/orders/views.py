@@ -1,14 +1,12 @@
-from pickle import FALSE
-
-from rest_framework import  viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
-
+from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from books.models import Book
 from .models import Order, OrderItem, CartItem, Cart
-from .serializers import  OrderSerializer, CartSerializer
-from  rest_framework.decorators import action
+from .serializers import OrderSerializer, CartSerializer
 
-# Create your views here.
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     permission_classes = [permissions.IsAuthenticated]
@@ -37,13 +35,31 @@ class CartViewSet(viewsets.ModelViewSet):
         serializer = CartSerializer(cart)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
-    def add_to_cart(self, request, pk=None):
-        cart = Cart.objects.get(user=request.user)
-        book = Book.objects.get(pk=pk)
-        quantity = request.data.get('quantity', 1)
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, book=book)
-        if not created:
-            cart_item.quantity += quantity
-            cart_item.save()
-        return Response({'status': 'item added to cart'})
+#  Функция для добавления книги в корзину
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_to_cart(request):
+    book_id = request.data.get('book_id')
+    quantity = int(request.data.get('quantity', 1))
+
+    try:
+        book = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return Response({'error': 'Книга не найдена'}, status=status.HTTP_404_NOT_FOUND)
+
+    user = request.user if request.user.is_authenticated else None
+
+    if user:
+        cart, _ = Cart.objects.get_or_create(user=user)
+    else:
+        # Создаём глобальную корзину без привязки к юзеру
+        cart, _ = Cart.objects.get_or_create(id=1)
+
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, book=book)
+    if not created:
+        cart_item.quantity += quantity
+    else:
+        cart_item.quantity = quantity
+
+    cart_item.save()
+    return Response({'detail': 'Книга добавлена в корзину'}, status=status.HTTP_200_OK)

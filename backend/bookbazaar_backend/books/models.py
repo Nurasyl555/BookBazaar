@@ -25,6 +25,7 @@ class Book(models.Model):
     stock = models.PositiveIntegerField(default=0)
     popularity = models.PositiveIntegerField(default=0)
     image_url = models.URLField(blank=True, null=True) 
+    image = models.ImageField(upload_to='books/images/', blank=True, null=True)  # Поле для загрузки изображения
 
     def __str__(self):
         return self.title

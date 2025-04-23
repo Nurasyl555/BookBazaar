@@ -3,7 +3,7 @@ from django.conf import settings
 from books.models import Book
 
 User = settings.AUTH_USER_MODEL
-# Create your models here.
+
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     created_at = models.DateTimeField(auto_now_add=True)

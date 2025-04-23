@@ -1,21 +1,40 @@
 from django.shortcuts import render
-from rest_framework import  viewsets, permissions
-from  rest_framework.decorators import action
+from rest_framework import viewsets, permissions, filters
+from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from  .models import Book, Genre, Publisher
-from .serializers import BookSerializer,BookCreateSerializer, GenreSerializer, PublisherSerializer
-# Create your views here.
+from django_filters.rest_framework import DjangoFilterBackend # type: ignore
+
+from .models import Book, Genre, Publisher
+from .serializers import BookSerializer, BookCreateSerializer, GenreSerializer, PublisherSerializer
+
+# -------------------- BOOK VIEWSET --------------------
+
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all()
     permission_classes = [permissions.AllowAny]
-    filterset_fields = ['genre', 'publisher', 'age_limit', 'price']  # Фильтрация по этим полям
-    search_fields = ['title']  # Поиск по названию книги
+    serializer_class = BookSerializer
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['genre', 'publisher', 'age_limit']
+    search_fields = ['title']
     ordering_fields = ['popularity', 'title', 'publication_date', 'price']
+
+    def get_queryset(self):
+        queryset = Book.objects.all()
+        min_price = self.request.query_params.get('min_price')
+        max_price = self.request.query_params.get('max_price')
+
+        if min_price:
+            queryset = queryset.filter(price__gte=min_price)
+        if max_price:
+            queryset = queryset.filter(price__lte=max_price)
+
+        return queryset
 
     def get_serializer_class(self):
         if self.action in ['create', 'update']:
             return BookCreateSerializer
         return BookSerializer
+
     def perform_create(self, serializer):
         serializer.save()
 
@@ -24,7 +43,9 @@ class BookViewSet(viewsets.ModelViewSet):
         popular_books = Book.objects.order_by('-popularity')[:5]
         serializer = BookSerializer(popular_books, many=True)
         return Response(serializer.data)
-    
+
+# -------------------- GENRE VIEWSET --------------------
+
 class GenreViewSet(viewsets.ModelViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
@@ -35,7 +56,8 @@ class GenreViewSet(viewsets.ModelViewSet):
         popular_genres = Genre.objects.order_by('name')[:5]
         serializer = GenreSerializer(popular_genres, many=True)
         return Response(serializer.data)
-    
+
+# -------------------- PUBLISHER VIEWSET --------------------
 
 class PublisherViewSet(viewsets.ModelViewSet):
     queryset = Publisher.objects.all()
@@ -44,6 +66,28 @@ class PublisherViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'], permission_classes=[permissions.AllowAny])
     def recent(self, request):
-        recent_publishers = Publisher.objects.order_by('name')[:5]  # Fetch the 5 most recent publishers
+        recent_publishers = Publisher.objects.order_by('name')[:5]
         serializer = self.get_serializer(recent_publishers, many=True)
         return Response(serializer.data)
+
+# -------------------- CHOICE ENDPOINTS --------------------
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def get_all_genres(request):
+    genres = Genre.objects.values_list('name', flat=True).distinct()
+    return Response(genres)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def get_all_publishers(request):
+    publishers = Publisher.objects.values_list('name', flat=True).distinct()
+    return Response(publishers)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_all_age_limits(request):
+    age_limits = Book.objects.values_list('age_limit', flat=True).distinct()
+    return Response(age_limits)
